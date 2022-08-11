@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./libs/bootstrap.css">
+    <script src="./libs/jquery-1.4.4.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container border ">
+        <span>  <div id="name">Name : &nbsp;</div></span>
+        <span>  <div id="user-id">User-Id : &nbsp;</div></span>
+        <span>  <div id="password">Password : &nbsp;</div></span>
+        <a class="btn btn-primary" href="./admin.user.html">BACK</a>
+        <button class="btn btn-danger" id="btn">DELETE</button>
+    </div>
+    <div class="row">
+        <div class="col-md-6 m-auto">
+            <div class="message-box">
+            </div>
+        </div>
+    </div>
+    <script src="./deleteuser.js"></script>
+    <script src="./delete.message.js"></script>
+    <script>
+        const messageBox = document.querySelector(".message-box")
+        fetchuser(id)
+
+        $("#btn").click(function(e) {
+            deleteuser(id)
+            location.replace("./admin.user.html")
+            e.preventDefault();
+
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./libs/jquery-1.4.4.min.js"></script>
+    <link rel="stylesheet" href="./libs/bootstrap.css">
+
+    <title>Full message </title>
+</head>
+
+<body>
+    <a href="./messages.html" class="d-none" id="href">Back</a>
+    <div class="message-box bg-dark text-light fs-1 fw-bolder px-2 p-3 ">
+        hello
+    </div>
+    <script>
+        const [id, index] = location.search.substring(1).split("|")
+        const url = `http://localhost:5000/${id}`
+        fetch(url).then(r => r.json()).then(data => {
+            const messages = data.messages
+            console.log(messages)
+            const _message = messages[index]
+            $(".message-box").text(_message);
+            $("#href").removeClass("d-none");
+            $("#href").attr("href", `./messages.html?${id}`);
+        }).catch((err) => {
+            console.log(err)
+        })
+    </script>
+</body>
+
+</html>

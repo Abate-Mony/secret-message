@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 onclick="sayName('<%=name%>')">
+        take this link and share to get a secret message
+    </h1>
+    <%const x="http://localhost:5000/messages/"+name%>
+        <%=Setid("=name")%>
+            <div class="url-container">
+
+                <a href="<%=x%>" target="_blank">
+                    <%=x%>
+                </a>
+            </div>
+            <script src="http://localhost:5000/jsfile"></script>
+</body>
+
+</html>sn
