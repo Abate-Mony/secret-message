@@ -1,0 +1,47 @@
+:root {
+    --shadow: 0px 0px 10px 5px gray
+}
+
+@keyframes scale {
+    from {
+        transform: scale(0.1);
+        border-radius: 60%;
+    }
+    50% {
+        transform: scale(1.5);
+        border-radius: 20%;
+    }
+    to {
+        transform: scale(1);
+        border-radius: 5px;
+        /* box-shadow: var(--shadow); */
+    }
+}
+
+@keyframes scale_rotate {
+    from {
+        transform: scale(0.1) rotate(0deg);
+        border-radius: 60%;
+    }
+    /* 50% {
+        transform: scale(1.5) rotate(180deg);
+        border-radius: 20%;
+    } */
+    to {
+        transform: scale(1) rotate(360deg);
+        border-radius: 5px;
+        /* box-shadow: var(--shadow); */
+    }
+}
+
+.scale {
+    animation-name: scale;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+.scale_rotate {
+    animation-name: scale_rotate;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}

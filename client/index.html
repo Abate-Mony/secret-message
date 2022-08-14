@@ -12,31 +12,58 @@
 </head>
 
 <body>
-    <!-- nav here -->
-    <div class="collapse" id="navbarToggleExternalContent">
-        <div class="bg-dark p-4">
-            <h5 class="text-white h4">SECRET MESSAGE</h5>
-            <span class="text-muted fs-2 text-danger"><a href="./login.html">Login</a></span>
-        </div>
-    </div>
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
-    </nav>
-    <!-- end here -->
 
-    <div class="row my-2 gx-1">
-        <div class="card card-2  col-sm-8 col-md-7  col-lg-5 col-xl-4 p-2 m-auto rounded-1  border  rounded-2 overflow-hidden  py-1">
-            <h1 class="card-title text-center text-warning">Secret Messages 2022 <br> 😍</h1>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark position-fixed top-0 w-100" style="z-index: 200;">
+        <div class="container">
+            <a href="#" class="navbar-brand text-danger fs-2">Secret Message</a>
+            <div class="navbar-toggler border-none">
+                <button class="navbar-toggler border-none" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+
+<div class="span navbar-toggler-icon"></div>
+                </button>
+
+            </div>
+
+            <div class="collapse navbar-collapse " id="navmenu">
+                <ul class="navbar-nav ms-auto">
+                    <!-- <li class="nav-item">
+                        <a href="./index.html" class="nav-link">Create account</a>
+                    </li> -->
+                    <!-- <li class="nav-item">
+                        <a href="#" class="nav-link">Learn from scratch</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a href="./login.html" class="nav-link">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- menu here  -->
+
+    </nav>
+    <!-- end of nav bar here  -->
+
+
+
+    <!-- modal here  -->
+
+
+
+    <!-- index container here -->
+
+    <div class="row my-2 gx-1 " style="height: 100vh;">
+        <div class="card card-2  col-sm-8 col-lg-6 col-xl-4 m-auto  col-xl-4 p-2 m-auto   rounded-2 overflow-hidden  
+        py-1  d-flex justify-content-center shadow py-4" style="border-radius: 10px!important;">
+            <h1 class="card-title text-center text-warning">Secret Messages <br> 😍</h1>
             <h6 class="card-subtitle text-center text-muted">Get anonymous feedback from your friends, coworkers and Fans.</h6>
             <hr>
-            <ol class="m-2 mt-3 mb-3 list-unstyled animate__fadeIn">
+            <!-- <ol class="m-2 mt-3 mb-3 list-unstyled animate__fadeIn">
                 <li style="color: indigo;">You can never know who messaged you!🔮</li>
                 <li class="text-muted">Please allow <strong>NOTIFICATION</strong> to receive notifications about new message.</li>
-            </ol>
+            </ol> -->
             <div class="border border-2 brder-4 bg-warning">
                 <h5>Enter your name-</h5>
                 <div class="form-group">
@@ -48,6 +75,9 @@
 
             </div>
         </div>
+
+
+        <!-- end of index container -->
         <script src="./index.js"></script>
         <script src="./libs/bootstrap.bundle.min.js"></script>
 

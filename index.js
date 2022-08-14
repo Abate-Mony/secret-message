@@ -1,6 +1,6 @@
 const express = require("express")
 const app = express()
-const PORT = 5000
+const PORT = process.env.PORT || 5000
 const upload = require("express-fileupload")
 const fs = require("fs")
 const password = require("./generator")
@@ -9,6 +9,7 @@ const cors = require("cors")
 app.use(express.json());
 const bodyparser = require("body-parser")
 app.use(cors())
+const dburl = "mongodb+srv://abate:Bewr5jdodSSpk06f@message.3qbzzy5.mongodb.net/?retryWrites=true&w=majority"
 const uri = 'mongodb://localhost:27017/message';
 const Messages = require("./models/message.js")
 const mongoose = require("mongoose")
@@ -23,7 +24,7 @@ const options = {
     family: 4 // Use IPv4, skip trying IPv6
 }
 const connectWithDB = () => {
-    mongoose.connect(uri, options, (err, db) => {
+    mongoose.connect(dburl, options, (err, db) => {
         if (err) console.error(err);
         else console.log("database connection")
     })
@@ -136,7 +137,7 @@ app.get("/get/files/:id", (req, res) => {
             console.log(err)
         } else {
             for (let file of files) {
-                const imgextensions = ["jpeg", "jpg", "jfif"]
+                const imgextensions = ["jpeg", "jpg", "jfif", "png"]
                 if (imgextensions.some(ex => file.includes(ex)) && file.includes(id)) {
                     images.push(`http://localhost:5000/images/${file}`)
                 }

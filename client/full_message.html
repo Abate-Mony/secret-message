@@ -7,15 +7,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./libs/jquery-1.4.4.min.js"></script>
     <link rel="stylesheet" href="./libs/bootstrap.css">
+    <link rel="stylesheet" href="./@keyframes..css">
 
     <title>Full message </title>
 </head>
 
-<body>
+<body style="background-color:gray;height: 100vh">
     <a href="./messages.html" class="d-none" id="href">Back</a>
-    <div class="message-box bg-dark text-light fs-1 fw-bolder px-2 p-3 ">
+    <!-- <div class="message-box bg-dark text-light fs-1 fw-bolder px-2 p-3 ">
         hello
+    </div> -->
+    <!-- style="max-width: 18rem;" -->
+    <div class="row py-5 h-100 px-3">
+        <div class="scale_rotate col col-md-8 col-lg-6 m-auto fs-2  d-flex justify-content-center align-items-center px-2">
+            <div class="card text-bg-primary mb-3 bg-primary w-100 shadow">
+                <div class="card-header">Message body</div>
+                <div class="card-body">
+                    <h5 class="card-title">message</h5>
+                    <p class="card-text message-box py-3"></p>
+                </div>
+            </div>
+        </div>
     </div>
+
+
     <script>
         const [id, index] = location.search.substring(1).split("|")
         const url = `http://localhost:5000/${id}`

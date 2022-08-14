@@ -6,24 +6,38 @@ function renderImages(images) {
             console.log(imgName)
             if (document.getElementById("img_container")) {
                 document.getElementById("img_container").innerHTML += `
-               <div class="shadow col-md-4 col-lg-3 overflow-hidden rounded-2  p-0 px-sm-5 px-md-0 px-5 m-2" style="height:20vh">
-              <a href="./view_pic.html?${imgName}|${id}">
+               <div class="img-container 
+                col-md-4 col-lg-4 overflow-hidden py-2  px-5 px-md-2">
+            
+               <div class="_card  h-100 overflow-hidden  position-relative" style="border-radius:5px">
+               <div class="position-absolute top-50 w-100 text-center  fw-bolder text-success _abs ">
+            ${"click to see image in full"}
+               </div>
+               <a href="./view_pic.html?${imgName}|${id}">
               
-              <img src="${image}" alt="${index}" class="h-75 w-100"/>
+              <img src="${image}" alt="${index}" class="img-height w-100"/>
               
               </a>
+
               <div class="d-flex justify-content-between">
-              
               <div class="btn btn-danger text-dark w-100 rounded-0" onclick="deleteImage('${imgName}')">DELETE</div>
-              <div class="btn btn-success text-dark w-100 rounded-0" onclick="download('${imgName}')">Download
+              <div class="btn btn-success text-dark w-100 rounded-0" onclick="download('${imgName}')">Download </div>
               </div>
-              </div>
+               
+               
+               </div>
+
            </div>
            `
             }
         });
     }
 }
+/*
+
+  
+
+*/
 getallimages(id.trim())
 
 function deleteImage(name, next = null) {

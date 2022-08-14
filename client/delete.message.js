@@ -61,9 +61,10 @@ function delete_all() {
 function renderMessages(messages) {
     messageBox.innerHTML = messages ?
         messages.map((message, index) =>
-            `<div class="d-flex">
+            `<div class="d-flex justify-content-between">
                 <a href="./full_message.html?${id}|${index}">
-                 <div class="my-1 fs-2 p-2 px-4 text-danger bg-primary w-100">${message}</div></a> <div class="del-btn spinner btn btn-danger">delete</div>
+                 <div class="my-1 p-2 px-4 text-danger bg-primary">${message}
+                 </div></a> <div class="del-btn  btn btn-danger p-0">delete</div>
                 </div>`).join(" ") : "no new messages"
     allmessagescontainer = [...document.querySelectorAll(".del-btn")]
     if (allmessagescontainer) {
