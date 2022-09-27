@@ -17,7 +17,8 @@
         <input type="submit" value="upload" /> </form>
     <script>
         const _id = location.search.substring(1)
-        document.getElementById("form").action = `http://localhost:5000/file/${_id}`
+        console.log(_id)
+        document.getElementById("form").action = `/api/v1/upload/post/${_id}`
     </script>
 
 </body>

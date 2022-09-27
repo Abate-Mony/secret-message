@@ -7,16 +7,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./libs/jquery-1.4.4.min.js"></script>
     <link rel="stylesheet" href="./libs/bootstrap.css">
-
+    <link rel="stylesheet" href="./style.css">
     <title>Admin</title>
 </head>
 
 <body>
-    <h1>hello im the admin of this page</h1>
+    <h1 class="text-center shadow rounded bg-dark text-white">ADMIN DASHBOARD</h1>
+    <div class="d-flex flex-sm-row flex-column   justify-content-center gap-2 gap-sm-4">
+        <div class="py-4 opacity opacity_ bg-primary text-light shadow rounded-3 px-4">
+            <div>Number of users</div>
+            <div id="number_of_users" class="text-center fw-bolder text-dark fs-3"></div>
+
+        </div>
+        <div class="py-4 opacity opacity_ bg-secondary text-light shadow rounded-3 px-4">
+            <div>Number of messages</div>
+            <div id="number_of_messages" class="text-center fw-bolder text-dark fs-3"></div>
+
+        </div>
+        <div class="py-4 opacity opacity_ bg-danger text-light shadow rounded-3 px-4">
+            <div>Number of images</div>
+            <div id="number_of_images" class="text-center fw-bolder text-dark fs-3"></div>
+
+        </div>
+    </div>
+
     <div id="userlist">
 
     </div>
 </body>
 <script src="./deleteuser.js"></script>
+<script>
+</script>
 
 </html>

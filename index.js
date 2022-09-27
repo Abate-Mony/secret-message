@@ -11,7 +11,7 @@ const bodyparser = require("body-parser")
 app.use(cors())
 const dburl = "mongodb+srv://abate:Bewr5jdodSSpk06f@message.3qbzzy5.mongodb.net/?retryWrites=true&w=majority"
 const uri = 'mongodb://localhost:27017/message';
-const Messages = require("./models/message.js")
+const Messages = require("./models/User.js")
 const mongoose = require("mongoose")
 const options = {
     useNewUrlParser: true,
@@ -24,15 +24,16 @@ const options = {
     family: 4 // Use IPv4, skip trying IPv6
 }
 const connectWithDB = () => {
-    mongoose.connect(dburl, options, (err, db) => {
-        if (err) console.error(err);
-        else console.log("database connection")
-    })
-}
+        mongoose.connect(uri, options, (err, db) => {
+            if (err) console.error(err);
+            else console.log("database connection")
+        })
+    }
+    // navigator.onLine
 connectWithDB()
 app.use(upload())
 
-
+app.use("/client", express.static("client"))
 app.post("/update", (req, res) => {
     const { _id, message } = req.body
     Messages.findById({ _id }).then(user => {
@@ -58,11 +59,10 @@ app.get("/:id", (req, res) => {
     Messages.findById({ _id: id }).then(user => {
         if (user) {
             const { _id, messages, name, password } = user
-            res.send({ messages, name, password })
-            return
+            return res.send({ messages, name, password })
+
         } else {
-            res.sendStatus(404)
-            console.log(404)
+            res.status(404).json({ msg: "error occured" })
         }
     }).catch(fail => {
         console.log(fail)
@@ -103,7 +103,7 @@ app.post("/login", (req, res) => {
         res.status(200).send({ id })
     }).catch(nouser => {
         console.log("fail to login user because the user!!!")
-        return res.sendStatus(404)
+        return res.status(404).json({ error: "fail to find user" })
     })
 
 })
@@ -146,6 +146,7 @@ app.get("/get/files/:id", (req, res) => {
         }
     })
 })
+
 app.get("/images/:name", (req, res) => {
     const name = req.params.name
     const _filepath = path.join(__dirname, "uploads", name)
@@ -158,7 +159,6 @@ app.post("/file/:id", (req, res) => {
     if (req.files) {
         var file = req.files.file
         var filename = file.name
-            // console.log(filename)
         const _lenght = filename.split(".").length - 1
         const filenamewithoutextension = filename.split(".").map((_, index) => {
             if (index != _lenght) {
@@ -166,16 +166,20 @@ app.post("/file/:id", (req, res) => {
             }
         }).join("")
         const fileextension = filename.split(".")[_lenght]
-
-        file.mv('./uploads/' + `${id}_${++counter}.${fileextension}`, function(err) {
-            if (err) {
-                console.log(err)
-                res.send("fail to upload file")
-            } else {
-                console.log("move to folder")
-                res.send("file uploaded ")
-            }
-        })
+        const _extensions = ["jpeg", "jpg", "jfif", "png", "mp3", "wav"]
+        if (_extensions.some(ext => ext == fileextension)) {
+            file.mv('./uploads/' + `${id}_${++counter}.${fileextension}`, function(err) {
+                if (err) {
+                    console.log(err)
+                    return res.send(`/upload.file.html?${id}`)
+                } else {
+                    console.log("move to folder")
+                    return res.status(200).json({ msg: "file uploaded successfully" })
+                }
+            })
+        } else {
+            return res.status(500).json({ msg: "something went wrong" })
+        }
     }
 })
 
@@ -205,12 +209,10 @@ app.delete("/delete/file/:name", (req, res) => {
             return
         } else {
             for (let file of files) {
-                // console.log(file)
                 if (file == name) {
                     fs.unlink(path.join(__dirname, "uploads", file), (err) => {
-                        if (err) throw err;
+                        if (err) console.log(err);
                         console.log(`${file} was deleted`);
-                        // res.send("delted file successfully!!")
                     });
                 }
             }
@@ -229,6 +231,9 @@ app.delete("/delete/message", (req, res) => {
         console.log(err)
         res.sendStatus(404)
     })
+})
+app.use((req, res) => {
+    res.send("<h1> UNKNOW ROUTE  </h2> ")
 })
 app.listen(PORT, () => {
     console.log("app is running on port ", PORT)

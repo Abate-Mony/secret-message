@@ -1,14 +1,14 @@
 var allmessagescontainer = null
-const userId = document.getElementById("user-id")
-const password_ = document.getElementById("password")
-const id = location.search.substring(1)
+    // const userId = document.getElementById("user-id")
+    // const password_ = document.getElementById("password")
+    // const id = location.search.substring(1)
+    // console.log(id)
 
 function fetchuser(id) {
     fetch(`http://localhost:5000/${id}`).
     then(res => {
         return res.json()
     }).then(data => {
-        // console.log(data)
         const {
             messages,
             name,
@@ -59,9 +59,10 @@ function delete_all() {
 }
 
 function renderMessages(messages) {
+    messages = messages.reverse()
     messageBox.innerHTML = messages ?
         messages.map((message, index) =>
-            `<div class="d-flex justify-content-between">
+            `<div class="d-flex justify-content-between justify-content-sm-center">
                 <a href="./full_message.html?${id}|${index}">
                  <div class="my-1 p-2 px-4 text-danger bg-primary">${message}
                  </div></a> <div class="del-btn  btn btn-danger p-0">delete</div>

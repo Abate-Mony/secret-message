@@ -1,28 +1,25 @@
 $("#submit").click(function(e) {
-    const url = "http://localhost:5000"
+    const url = "/api/v1/auth/register"
     const value = $("#input").val();
     sendData(url, { name: value }, "POST")
     e.preventDefault();
-});
-// $(document).keypress(function(e) {
-//     if (e.keyCode == "13" && $("#input").val().trim().length != 0) {
-//         const url = "http://localhost:5000"
-//         const value = $("#input").val().trim();
-//         sendData(url, { name: value }, "POST")
 
-//     }
-// });
+});
+
 $("#login").click(function(e) {
-    const url = "http://localhost:5000/login"
+    $(this).text("").append(` <span class="spinner-border"></span>`)
+        // $(this).attr("value", "hello")
+        // console.log(this)
+    const url = "/api/v1/auth/login"
     const id = $("#id").val().trim();
     const password = $("#password").val().trim();
-    sendData(url, { id, password }, "POST")
+    sendData(url, { id, password }, "POST", this)
     e.preventDefault();
 });
 
 
 
-function sendData(url, data, method = "GET") {
+function sendData(url, data, method = "GET", elm = null) {
     fetch(url, {
         method,
         headers: {
@@ -30,25 +27,37 @@ function sendData(url, data, method = "GET") {
         },
         body: JSON.stringify(data)
     }).then(res => {
-        console.error(res.status)
         if (res.ok) {
             return res.json()
         } else {
-            return res.json()
+            $(".alert").removeClass("d-none")
+            $(".alert").html("<strong style='font-style:oblique'>wrong password or username</strong>");
+
+            setTimeout(() => {
+                $(".alert").addClass("d-none")
+            }, 4000);
+            throw new Error("something went wrong")
         }
 
 
 
     }).then(data => {
-        // alert("enter the second ")
+        console.log(data)
         $("#input").val("")
+        const { user: { id, _id, token } } = data
+
         sessionStorage.setItem("login", data.id)
-            //   if the is a response redirect users to a new page
-        location.replace(`./messages.html?${data.id}`)
+        sessionStorage.setItem("token", JSON.stringify(token))
+        location.replace(`./messages.html`)
     }).catch(err => {
         console.log(err)
-        alert("alert wrong information enter check and try again")
-
+        if (elm) {
+            console.log(elm)
+            $(elm).text("Login")
+            const childElm = elm.querySelector("span")
+            $(childElm).removeClass("spinner-border");
+        }
+        // alert("alert wrong information enter check and try again")
 
     })
 

@@ -48,10 +48,17 @@
             </div>
         </div>
         <!-- menu here  -->
+        <div class="scroll-container position-absolute  w-100 bg-success" id="scroll_container" style="bottom: 0;">
+            <div class=" p-1 bg-danger " id="scroll">
+
+            </div>
+        </div>
 
     </nav>
     <!-- end of nav bar here  -->
+    <!-- static scroll bar here  -->
 
+    <!-- end of static scroll bar  -->
     <!-- Button trigger modal -->
 
 
@@ -77,26 +84,32 @@
 
     <!-- end of modal here -->
 
-    <div class="user-info" style="margin-top:6rem">
-        <div class=" row justify-content-between p-3">
+    <div class="container py-5">
+        <div class="user-info border border-3 rounded-top" style="margin-top:10rem">
+            <div class=" row justify-content-between p-3 g-2">
+                <div class=" col-md col-sm p-0 mx-1">
+                    <div class="d-flex gap-1 text-center justify-content-center overflow-hidden flex-column">
+                        <button type="button" class="btn btn-outline-secondary" style="font-size:0.8rem" id="link"></button>
 
-            <div class=" col-12 col-sm">
-                <div class="container d-flex gap-3 text-center justify-content-center">
-                    <a href="#" id="link"></a>
-                    <div id="copy_" class="btn btn-primary">&copy;&nbsp;</div>
+
+                        <div id="copy_" class="btn-lg btn-primary w-100">&copy;&nbsp;copy link </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-12 col-sm" id="logindetails">
-                <span>  <div id="user-id" class="fw-bolder">User-Id : &nbsp;</div></span>
-                <span>  <div id="password" class="fw-bolder">Password : &nbsp;</div></span>
+                <div class="col-md  rounded-1 d-flex gap-1  overflow-hidden flex-column p-0 mx-1" id="logindetails">
+                    <span>  <div id="user-id" class="fw-bolder btn btn-outline-warning w-100">ID : &nbsp;</div></span>
+                    <span>  <div id="password" class="fw-bolder fw-bolder btn btn-outline-dark w-100">Password : &nbsp;</div></span>
+                </div>
+                <div class="col-md-12">
+                    <span>  <a href="#" id="password" class="fw-bolder fw-bolder btn btn-success w-100">Add to whatsapp</a></span>
+                </div>
             </div>
         </div>
     </div>
     <div class="reload 
-    position-fixed end-0 p-2 bg-success shadow rounded top-50" style="z-index: 201;">
+    position-fixed  p-2 bg-success shadow rounded top-50" onclick="location.reload()" style="z-index: 201;right:10px">
         refreesh page
     </div>
-    <h2 id="name" class="text-center bg-dark text-danger text-uppercase">Name</h2>
+    <h2 id="name" style="z-index:20" class="text-center bg-dark text-danger text-uppercase p-3">Name</h2>
 
     <div class="row">
         <div class="col-md-10 col-lg-6  m-auto   d-flex justify-content-center align-items-center">
@@ -106,53 +119,91 @@
     </div>
 
     <h2 class="text-center fs-1 text-success fw-bolder">Messages</h2>
-    <div class="delete-all-messages btn btn-danger " onclick="delete_all()">
-        DELETE ALL
-    </div>
 
-    <div class="row">
 
-        <div class=" border border-success m-auto">
-            <div class="message-box">
-            </div>
+    <div class="container">
+
+        <div class="message-box row g-4 pb-4">
         </div>
     </div>
 
-    <script src="./delete.message.js"></script>
-    <script src="./images.js"></script>
+
+    <script src="./__messages.js"></script>
     <script>
         const messageBox = document.querySelector(".message-box")
         const isUser = sessionStorage.getItem("login")
+        const id = location.search.substring(1)
+        console.log(isUser)
 
         function logout() {
             location.replace("./index.html")
             sessionStorage.removeItem("login")
         }
+
+
+
+        function fadeOut() {
+            const _last_index = document.getElementById("_last_index")
+            const scroll = $("#scroll")[0]
+            const cards = [...document.querySelectorAll("._card")]
+                // console.log(cards)
+            const _off_top = _last_index.offsetTop
+            const _scroll = window.pageYOffset + window.innerHeight
+            const _percent = (_scroll / _off_top) * 100
+            scroll.style.width = `${_percent}%`
+            const H = (window.innerHeight / 100) * 90
+            cards.forEach((_, __) => {
+                const _top = _.getBoundingClientRect().top;
+                if (_top <= H) {
+
+                    $(_).addClass("opacity");
+                } else {
+                    $(_).css("opacity", "0");
+                    $(_).removeClass("opacity");
+                }
+            })
+        }
+
+        function _scroll(e) {
+            fadeOut()
+        }
+        window.addEventListener("scroll", e => {
+            _scroll()
+            const scrollHeight = window.pageYOffset
+            const navbarHeight = $(".navbar")[0].getBoundingClientRect().height
+            const nameHeight = $("#name")[0].offsetTop
+                // console.log(nameHeight, scrollHeight)
+            if (scrollHeight >= nameHeight - 50) {
+                // console.log(navbarHeight)
+                // $(".scroll-container").css({
+                //     "bottom": -nameHeight + "px"
+                // })
+                $("#name").addClass("position-fixed w-100").css({
+                    "top": navbarHeight
+                })
+            } else {
+                $("#name").removeClass("position-fixed")
+                    // $(".scroll-container").css({
+                    //     "bottom": 0 + "px"
+                    // })
+            }
+
+        })
         if (isUser) {
             function alert_() {
-                $("#logindetails").addClass("alert");
+                $("#logindetails").addClass("_alert");
                 setTimeout(() => {
-                    $("#logindetails").removeClass("alert");
+                    $("#logindetails").removeClass("_alert");
                 }, 4000);
             }
             const href = location.href
-            $("#link").text(href);
-            fetchuser(id)
-            $("#copy_").click(function(e) {
-                // alert("fail to copy text")
-                navigator.clipboard.writeText(href).then(data => {
-                    alert("text copy to clipboard")
-                }).catch(err => {
-                    alert("fail to copy")
-                })
-                e.preventDefault();
-            });
         } else {
             location.href = `./message.html?${id}`
         }
     </script>
 
     <script src="./libs/bootstrap.bundle.min.js"></script>
+    <span id="_last_index"></span>
 </body>
 
 </html

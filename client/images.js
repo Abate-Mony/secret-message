@@ -1,9 +1,8 @@
 function renderImages(images) {
-    document.getElementById("img_container").innerHTML = ""
+    document.getElementById("img_container") ? document.getElementById("img_container").innerHTML = "" : "";
     if (images) {
         images.forEach((image, index) => {
             const imgName = image.split("/")[image.split("/").length - 1]
-            console.log(imgName)
             if (document.getElementById("img_container")) {
                 document.getElementById("img_container").innerHTML += `
                <div class="img-container 
@@ -69,6 +68,9 @@ function getallimages(id) {
         // console.log(data)
         const images = data.images
         renderImages(images)
+        img_container = [...document.querySelectorAll(".img-container")]
+        fadeOut()
+            // img_container.forEach((img) => { $(img).hide() })
     }).catch(err => {
         console.log(err)
     })

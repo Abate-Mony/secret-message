@@ -1,8 +1,20 @@
 const mongoose = require("mongoose")
-const messageSchema = new mongoose.Schema({
-    name: String,
-    messages: Array,
-    password: String,
-    imgurl: Array
+
+const MessageSchema = new mongoose.Schema({
+    sentTo: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+        require: [true, "please provide a sentto"],
+
+    },
+    message: {
+        type: String,
+        require: [true, "please provide a message"],
+        minlength: [3, "please send a long message"]
+    }
+}, {
+    timestamps: true
 })
-module.exports = mongoose.model("message", messageSchema)
+
+
+module.exports = mongoose.model("Message", MessageSchema)

@@ -23,11 +23,19 @@ function helper(url, id, func, method = "GET") {
     } : null).then(users => {
         return users.json()
     }).then(data => {
+        const _lenght = data.users.map(user => user.messages.length).reduce((acc, next) => acc + next)
+        console.log(_lenght)
+        const numbers_of_users = document.getElementById("number_of_users")
+        const numbers_of_messages =
+            document.getElementById("number_of_messages")
+
+        if (numbers_of_users) numbers_of_users.textContent = data.users.length
+        if (numbers_of_messages) numbers_of_messages.textContent = _lenght
         func(data.users)
     }).catch(err => {
         console.log(err)
             // alert("error could not delete users with id :" + id)
-        location.replace("./error.html")
+            // location.replace("./error.html")
 
     })
 }

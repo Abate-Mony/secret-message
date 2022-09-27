@@ -8,19 +8,22 @@
     <script src="./libs/jquery-1.4.4.min.js"></script>
     <link rel="stylesheet" href="./libs/bootstrap.css">
     <link rel="stylesheet" href="./@keyframes..css">
+    <link rel="stylesheet" href="___.css">
 
-    <title>Full message </title>
+    <title>Full message</title>
 </head>
 
-<body style="background-color:gray;height: 100vh">
-    <a href="./messages.html" class="d-none" id="href">Back</a>
-    <!-- <div class="message-box bg-dark text-light fs-1 fw-bolder px-2 p-3 ">
-        hello
-    </div> -->
-    <!-- style="max-width: 18rem;" -->
+<body style="height: 100vh; overflow:auto" class="bg-dark container mt-2">
+    <div class="__loader">
+        <div class="spinner-border border-top-3" style="width:60px;height:60px;">
+
+        </div>
+    </div>
+    <a href="./messages.html" class="d-none btn btn-success" id="href">Back</a>
+
     <div class="row py-5 h-100 px-3">
         <div class="scale_rotate col col-md-8 col-lg-6 m-auto fs-2  d-flex justify-content-center align-items-center px-2">
-            <div class="card text-bg-primary mb-3 bg-primary w-100 shadow">
+            <div class="card text-bg-primary mb-3 bg-secondary w-100 shadow">
                 <div class="card-header">Message body</div>
                 <div class="card-body">
                     <h5 class="card-title">message</h5>
@@ -32,18 +35,38 @@
 
 
     <script>
-        const [id, index] = location.search.substring(1).split("|")
-        const url = `http://localhost:5000/${id}`
-        fetch(url).then(r => r.json()).then(data => {
-            const messages = data.messages
-            console.log(messages)
-            const _message = messages[index]
-            $(".message-box").text(_message);
-            $("#href").removeClass("d-none");
-            $("#href").attr("href", `./messages.html?${id}`);
-        }).catch((err) => {
-            console.log(err)
-        })
+        const token = JSON.parse(sessionStorage.getItem("token"))
+        let headersList = {
+            "Accept": "*/*",
+            // "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+            "Authorization": `pablo ${token}`,
+            "Content-Type": "application/json"
+        }
+
+        const id = location.search.substring(1)
+            // console.log(id)
+        const url = `/api/v1/message/${id}`
+        fetch(url, {
+                headers: headersList
+            }).then(r => {
+                console.log(r)
+                if (!r.ok) {
+                    throw new Error("invalid id or token")
+                }
+                return r.json()
+            }).then(data => {
+                $(".__loader").addClass("d-none");
+                // console.log(data)
+                $(".message-box").html(`<span>${data.message.message} </span>`);
+                $("#href").removeClass("d-none");
+                $("#href").attr("href", `./messages.html`);
+            }).catch((err) => {
+                console.log(err)
+                location.replace(`./message.html?${id}`)
+            })
+            // (async function() {
+            //     await alert("hello")
+            // }())
     </script>
 </body>
 
