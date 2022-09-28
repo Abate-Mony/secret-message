@@ -1,10 +1,15 @@
 .__loader {
-    position: fixed;
+    position: absolute;
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 100;
-    background-color: gray;
+    margin: 0;
+    padding: 0;
+    /* background-color: gray; */
+    opacity: 1;
+    background-image: linear-gradient(to right, pink, rgba(255, 0, 0, 0), pink);
+    background-color: rgb(219, 196, 200);
 }

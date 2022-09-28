@@ -66,8 +66,8 @@ const Messages = async() => {
         messageBox.innerHTML = messages.length > 0 ?
             messages.map(({ message, _id, }, index) => {
                     return (
-                            `<div class="col-md-6 col-lg-4 _card">
-        <div class="card bg-secondary text-white">
+                            `<div class="col-md-6 col-lg-4 _card position-relative" >
+        <div class="card bg-dark text-white text-center" style="opacity:0.9!important;min-height:40vh!important">
             <div class="card-body">
                 <div class="hr mb-3 ">
                 </div>
@@ -77,12 +77,15 @@ const Messages = async() => {
                 <div class="card-text ">
                 ${message.length > 200 ? message.slice(0, 200) + "..." : message} 
                 </div>
-                ${message.length > 1 ? `<a href='./full_message.html?${_id}' class='btn btn-dark my-2 d-block w-50 m-auto'>read more</a>` : ""}
-            <button  class="btn btn-danger my-2 d-flex align-items-center
-              gap-2 w-50 m-auto del-btn text-center justify-content-center" id=${_id}>
-            <span class=""></span>
-                Delete
-            </button>
+                ${message.length > 30 ? `<a href='./full_message.html?${_id}'
+                 class='btn btn-warning my-2 d-block w-50 m-auto'>read more</a>` : ""}
+            <div  class="p-2 bg-dark del-btn position-absolute bottom-0 end-0 me-2" id=${_id}>
+            <i class="fa-solid fa-trash" style="font-size:1rem"></i>
+            </div>
+            <div  class="p-2 bg-dark  position-absolute bottom-0 start-0 ms-2 spinner-container d-none">
+            <div class="spinner-border text-danger" role="status">
+</div></i>
+            </div>
             </div>
         </div>
     </div>`
@@ -93,9 +96,15 @@ const Messages = async() => {
     const delBtn = [...document.querySelectorAll(".del-btn")]
     delBtn.forEach((btn, id) => {
         btn.addEventListener("click", (e) => {
-            const spanElm = btn.querySelector("span")
-            spanElm.classList.add("spinner-border")
-            deleteMessage(btn.id, spanElm)
+            // console.log(e.target.parentElement)
+            const spinner=e.target.parentElement.parentElement.querySelector(".spinner-container")
+            $(spinner).removeClass("d-none")
+            // console.log(spinner);
+            
+            // const spanElm = btn.querySelector("span")
+            // spanElm.classList.add("spinner-border")
+            // alert("")
+            deleteMessage(btn.id,spinner)
         })
     })
 
@@ -152,7 +161,10 @@ const Messages = async() => {
     // })
 
 }
-Messages()
+(function(){
+    
+    Messages()
+}())
 const deleteMessage = async (id, spanElm) => {
     try {
         const response = await fetch(`/api/v1/message/${id}`, {
@@ -161,7 +173,7 @@ const deleteMessage = async (id, spanElm) => {
         })
         if (!response.ok) {
             const BadResponse = await response.json()
-            spanElm.classList.remove("spinner-border")
+            spanElm.classList.add("d-none")
             console.log(BadResponse)
             alert("fail to delte message")
             return

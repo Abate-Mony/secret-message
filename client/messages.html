@@ -9,15 +9,132 @@
     <link rel="stylesheet" href="./libs/bootstrap.css">
     <link rel="stylesheet" href="./style.css">
     <script src="./libs/jquery-1.4.4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
     <title>messages</title>
+    <style>
+        .message-box {
+            min-width: 40vh;
+        }
+        
+        .__loader {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 202;
+            margin: 0;
+            padding: 0;
+            opacity: 1;
+            /* background-image: linear-gradient(to right, pink, rgba(255, 0, 0, 0), pink); */
+            /* background-color: rgb(219, 196, 200); */
+        }
+    </style>
 </head>
 
-<body>
+
+<body style="background-image: linear-gradient(to right, pink, rgba(255, 0, 0, 0), pink);
+position: relative;font-family: 'Open Sans', sans-serif;
+">
 
 
+
+
+    <!-- modal 2X -->
+
+    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalToggleLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    thanks for sending your feedback <br> will help our team to improve
+                </div>
+                <div class="modal-footer">
+                    <!-- <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"></button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalToggleLabel2"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Email Address:</label>
+                                <input type="email" required="true" class="form-control" id="recipient-name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="message-text" class="col-form-label">Message:</label>
+                                <textarea class="form-control" id="message-text"></textarea>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Hide this modal and show the first with the button below. -->
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Open first modal</a>
+    <!-- end of modal 2X -->
+    <!-- modal for message -->
+
+
+
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Open modal for @mdo</button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">Open modal for @fat</button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Open modal for @getbootstrap</button> -->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Email Address:</label>
+                            <input type="email" required="true" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Message:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Send message</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- end of modal for messages -->
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark position-fixed top-0 w-100" style="z-index: 200;">
         <div class="container">
-            <a href="#" class="navbar-brand text-danger fs-2">Secret Message</a>
+            <a href="#" class="navbar-brand text-danger fs-2" style="color:pink!important">Secret Message</a>
             <div class="navbar-toggler border-none">
                 <button class="navbar-toggler border-none" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
 
@@ -36,13 +153,13 @@
                     </li> -->
                     <li class="nav-item">
                         <!-- <span class="nav-link" > -->
-                        <button type="button" class="bg-dark text-secondary nav-link border-none fw-bolder btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <button type="button" class="bg-dark text-secondary nav-link border-none fw-bolder btn btn-outline-dark" style="color:pink!important" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                              Logout
                               </button>
                         <!-- </span> -->
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">About</a>
+                        <a href="#" class="nav-link" style="color:pink!important">About</a>
                     </li>
                 </ul>
             </div>
@@ -124,6 +241,10 @@
     <div class="container">
 
         <div class="message-box row g-4 pb-4">
+            <div class="__loader">
+                <div class="spinner-border border-top-3" style="width:60px;height:60px;">
+                </div>
+            </div>
         </div>
     </div>
 
@@ -146,7 +267,6 @@
             const _last_index = document.getElementById("_last_index")
             const scroll = $("#scroll")[0]
             const cards = [...document.querySelectorAll("._card")]
-                // console.log(cards)
             const _off_top = _last_index.offsetTop
             const _scroll = window.pageYOffset + window.innerHeight
             const _percent = (_scroll / _off_top) * 100
@@ -201,7 +321,13 @@
             location.href = `./message.html?${id}`
         }
     </script>
+    <script>
+        window.addEventListener("load", () => {
 
+            var myModal = new bootstrap.Modal(document.getElementById('exampleModalToggle2'))
+            myModal.show()
+        })
+    </script>
     <script src="./libs/bootstrap.bundle.min.js"></script>
     <span id="_last_index"></span>
 </body>
