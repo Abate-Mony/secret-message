@@ -2,6 +2,11 @@ const Message = require("../models/Message")
 const User = require("../models/User")
 const { BadErrorRequest } = require("../error")
 const path = require("path")
+
+
+
+
+
 module.exports = {
     upload: upload = async(req, res) => {
         const id = req.params.id
@@ -11,12 +16,11 @@ module.exports = {
         }
         if (req.files) {
             var file = req.files.file
+            console.log(file)
             var filename = file.name
             const fileextension = path.extname(filename)
             const extensions = [".jpeg", ".jpg", ".jfif", ".png"]
             const absolutePath = path.resolve(__dirname, "../uploads")
-            console.log(absolutePath)
-            console.log(fileextension)
             if (extensions.includes(fileextension)) {
                 const date = Date.now()
                 file.mv(absolutePath + `\\${id}_${date}${fileextension}`, function(err) {
@@ -31,20 +35,26 @@ module.exports = {
             } else {
                 throw new BadErrorRequest("Please send a file")
             }
+
+
+
         } else {
             throw new BadErrorRequest("server error")
         }
     },
     createMessage: createMessage = async(req, res) => {
+        await Message.init()
         const { id } = req.params
         const message = req.body.message
         const isUser = await User.findOne({ _id: id })
-        console.log(isUser)
+            // console.log(isUser)
         if (!isUser) { throw new BadErrorRequest("user is not found") }
         const msg = await Message.create({
             sentTo: id,
             message
         })
         res.status(200).json({ msg: msg })
+
+
     }
 }

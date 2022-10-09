@@ -11,8 +11,49 @@
     <title>secret message</title>
 </head>
 
-<body>
-    <div class="collapse" id="navbarToggleExternalContent">
+<body style="height:100vh;width:100vw;background-image: linear-gradient(to right, pink, rgba(255, 0, 0, 0), pink);" class="d-flex flex-column justify-content-center align-items-center">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark position-fixed top-0 w-100" style="z-index: 200;">
+        <div class="container">
+            <a href="#" class="navbar-brand text-danger fs-2" style="color:pink!important">Secret Message</a>
+            <div class="navbar-toggler border-none">
+                <button class="navbar-toggler border-none" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+
+<div class="span navbar-toggler-icon"></div>
+                </button>
+
+            </div>
+
+            <div class="collapse navbar-collapse " id="navmenu">
+                <ul class="navbar-nav ms-auto">
+                    <!-- <li class="nav-item">
+                        <a href="./index.html" class="nav-link">Create account</a>
+                    </li> -->
+                    <!-- <li class="nav-item">
+                        <a href="#" class="nav-link">Learn from scratch</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a href="./login.html" class="nav-link" style="color:pink!important">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./index.html" class="nav-link" style="color:pink!important">Create Account</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a href="./about.html" class="nav-link" style="color:pink!important">About</a>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+        <!-- menu here  -->
+        <div class="scroll-container position-absolute  w-100 bg-success" id="scroll_container" style="bottom: 0;">
+            <div class=" p-1 bg-danger " id="scroll">
+
+            </div>
+        </div>
+
+    </nav>
+
+
+    <!-- <div class="collapse" id="navbarToggleExternalContent">
         <div class="bg-dark p-4">
             <h5 class="text-white h4">Collapsed content</h5>
             <span class="text-muted"><a href="./login.html"> login here</a></span>
@@ -24,20 +65,21 @@
             <span class="navbar-toggler-icon"></span>
           </button>
         </div>
-    </nav>
+    </nav> -->
+    <div class="btn btn-outline-success my-2 p-1 bg-dark text-light">send me to me <br>
+        <span class="btn btn-lg text-dark bg-danger  " style="background-color:pink!important"> rose Mary</span></div>
+    <div class="row my-2 w-100">
+        <div class="card card-2 col-12 col-sm-8 col-md-7  col-lg-5 col-xl-4 p-2 m-auto rounded-3 shadow">
 
-    <div class="row my-2 ">
-        <div class="card card-2 col-12 col-sm-8 col-md-7  col-lg-5 col-xl-4 p-2 m-auto rounded-1  border border-secondary">
-
-            <div class="border border-2 brder-4 bg-dark">
+            <div class="bg-dark">
                 <!-- <form id="signup" action="http://localhost:5000/" method="post" class="m-2 mt-3 animate__fadeIn "> -->
                 <!-- <h5>Enter your name-</h5> -->
                 <div class="form-group">
-                    <textarea name="name" id="input" cols="30" rows="10" class="w-100"></textarea>
+                    <textarea name="name" id="input" cols="30" rows="10" class="w-100 border-none"></textarea>
                     <!-- <input type="text" class="form-control" name="name" id="input" placeholder="Nickname " autofocus="" required=""> -->
                 </div>
                 <div class="form-group">
-                    <input class="btn btn-block font-weight-font-weight-bold bg-secondary w-100 m-0 my-2" type="submit" id="submit" name="sub" value="send message💎">
+                    <input class="btn btn-block font-weight-font-weight-bold  w-100 m-0 my-2 border-0 rounded-0" type="submit" style="background-color:pink!important" id="submit" name="sub" value="send message💎">
                 </div>
                 <div class="form-group text-center">
                     <label for="agree" class="text-center">
@@ -48,7 +90,7 @@
                 <!-- </form> -->
 
             </div>
-            <a href="./upload.file.html" id="file">uploadfile</a>
+            <a href="./upload.file.html" id="file" class="btn btn-dark text-warning m-auto p-2 text-center">uploadfile</a>
             <a href="./index.html" class="d-none" id="link"> would you like to get your own link </a>
         </div>
         <script>
@@ -89,8 +131,18 @@
                     const link = document.getElementById("link")
                     link.classList.remove("d-none")
                     $("#input").val("")
+                    const _url = location.host
+                    const socket = new WebSocket(`ws://${_url}`);
+                    const sendMessage = (_id) => {
+                        socket.send(_id)
+                    }
+                    socket.addEventListener("open", function(event) {
+                        console.log("connected to web server thanks for everythng")
+                        sendMessage(_id)
+                    })
                 }).catch(err => {
                     alert("fail to send message")
+                    console.log(err)
 
                 })
 

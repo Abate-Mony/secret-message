@@ -8,12 +8,31 @@
     <script src="./libs/jquery-1.4.4.min.js"></script>
     <link rel="stylesheet" href="./libs/bootstrap.css">
     <!-- <link rel="stylesheet" href="./@keyframes..css"> -->
-    <link rel="stylesheet" href="___.css">
-
+    <!-- <link rel="stylesheet" href="./___.css"> -->
+    <style>
+        .__loader {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            margin: 0;
+            padding: 0;
+            left: 0;
+            /* background-color: gray; */
+            opacity: 1;
+            top: 0;
+            /* background-image: linear-gradient(to right, pink, rgba(255, 0, 0, 0), pink); */
+            background-color: rgb(219, 196, 200);
+        }
+    </style>
     <title>Full message</title>
 </head>
 
-<body class="container mt-2" style="height: 100vh; overflow:auto;background-image: linear-gradient(to right, pink, rgba(255, 0, 0, 0), pink);">
+<body class="container pt-2" style="height: 100vh; 
+overflow:auto;background-image: linear-gradient(to right, pink, rgba(255, 0, 0, 0), pink);">
     <div class="__loader">
         <div class="spinner-border border-top-3" style="width:60px;height:60px;">
 
@@ -57,7 +76,7 @@
             }).then(data => {
                 $(".__loader").addClass("d-none");
                 // console.log(data)
-                $(".message-box").html(`<span>${data.message.message} </span>`);
+                $(".message-box").text(`${data.message.message} `);
                 $("#href").removeClass("d-none");
                 $("#href").attr("href", `./messages.html`);
             }).catch((err) => {

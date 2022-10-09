@@ -9,7 +9,6 @@ const UserSchema = new mongoose.Schema({
         required: [true, "please provide a name"],
         minLength: 3,
         maxLength: 20,
-        unique: true
     },
     password: {
         type: String,
@@ -21,6 +20,8 @@ const UserSchema = new mongoose.Schema({
         required: [true, "please provide an id"],
         unique: true,
     }
+}, {
+    timestamps: true
 })
 UserSchema.pre("validate", async function(next) {
     this.password = generatePassword()

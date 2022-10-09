@@ -1,0 +1,155 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --container-sm: 100%;
+    --container-md: 95%;
+    --container-lg: 90%;
+}
+
+body {
+    background-color: rgb(7, 7, 7);
+}
+
+nav {
+    box-shadow: 0 0 1px 1px rgb(240, 233, 233);
+}
+
+.nav__container {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 4rem;
+}
+
+.container {
+    width: var(--container-lg);
+    margin: 0 auto;
+}
+
+.nav__brand {
+    font-size: 1.5rem;
+}
+
+.nav__container .nav__items ul {
+    list-style-type: none;
+    display: flex;
+    gap: 1rem;
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+section {
+    margin: 1rem 0;
+}
+
+.card {
+    width: 100%;
+    border: 1px solid gray;
+    padding: 1rem;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-body {
+    padding: 0.2rem 0.3rem;
+}
+
+.grid__ {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}
+
+.grid__2 {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    gap: 0.5rem;
+}
+
+.user-info {
+    display: grid;
+    grid-template-columns: 40% 25% 25% 10%;
+    padding: 0.3rem 0.5rem;
+}
+
+.text-shadow {
+    text-shadow: 5px 2px 5px green;
+}
+
+.box-- {
+    background-color: aqua;
+    padding: 2rem;
+    width: 200px;
+    border-radius: 0px 5px 5px 100px;
+    position: relative;
+}
+
+.shade {
+    position: absolute;
+    bottom: 0px;
+    width: 50%;
+    height: 50px;
+    left: -8px;
+    background-color: rgb(53, 89, 121);
+    box-sizing: content-box;
+    transform: rotate(45deg);
+}
+
+input:focus {
+    border: none;
+    outline: none;
+}
+
+.triangle {
+    z-index: 11;
+    position: absolute;
+    box-sizing: content-box;
+    top: 0;
+    width: 0;
+    height: 0;
+    left: -40px;
+    border: 20px solid blue;
+    border-left: 20px solid transparent;
+    /* border-right: 125px solid orange; */
+    border-bottom: 20px solid transparent;
+    /* border-top: 0; */
+    /* border-bottom: 300px solid black; */
+}
+
+.big-box {
+    position: relative;
+    /* width: 200px; */
+    /* height: 100px; */
+    min-height: 10vh;
+    background-color: blue;
+    margin-left: 4rem;
+    border-radius: 5px;
+    border-top-left-radius: 0;
+    /* overflow: auto; */
+    /* overflow: hidden; */
+}
+
+.__border {
+    border: 5px solid transparent;
+    border-right: 5px dotted white;
+}
+
+.__hr {
+    border-top: 10px dotted white !important;
+    background-color: transparent;
+    width: 50%;
+    transform: rotate(90deg);
+    position: absolute;
+}

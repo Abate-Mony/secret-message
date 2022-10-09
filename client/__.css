@@ -203,7 +203,7 @@ p::after {
     justify-content: center;
     gap: 1rem;
     background-color: white;
-    position: relative;
+    position: absolute;
     /* opacity: .8; */
 }
 

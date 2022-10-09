@@ -13,7 +13,7 @@ const deleteMessage = async(req, res) => {
         sentTo: userId
     })
     if (!message) {
-        throw new BadErrorRequest("fail to delte message")
+        throw new BadErrorRequest("fail to delete message")
     }
     res.status(200).json({ msg: "successfully deleteMessage" })
 }

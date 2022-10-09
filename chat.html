@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .message-box {
+            height: 50vh;
+            border: 2px solid black;
+        }
+        
+        textarea {
+            border: 2px solid orangered;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="message-box">
+
+    </div>
+    <textarea name="" id="textarea" cols="30" rows="10">
+        enter text in this box
+    </textarea>
+    <div>
+
+        <button onclick="sendMessage()">
+        send message
+    </button>
+    </div>
+    <script>
+        const textarea = document.getElementById("textarea")
+
+        const id = Math.floor(Math.random() * 23) + 1
+        const socket = new WebSocket("ws://localhost:3000")
+        socket.onopen = function(e) {
+            console.log("connected to server")
+        }
+        socket.onmessage = function(e) {
+            console.log("message recieved from server is ", e.data)
+            const message = e.data;
+            if (e.data) textarea.value = ""
+            const messageBox = document.querySelector(".message-box")
+            messageBox.innerHTML += e.data
+
+        }
+        const sendMessage = async() => {
+            console.log("clicke")
+            const value = textarea.value
+            console.log(value)
+            socket.send(value + id);
+        }
+    </script>
+</body>
+
+</html>

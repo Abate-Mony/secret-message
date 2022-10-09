@@ -1,5 +1,6 @@
 const User = require("../models/User")
 const bcrypt = require("bcryptjs")
+const feedBack = require("../models/UserFeed")
 const { BadErrorRequest, UnethicatedError } = require("../error")
 const login = async(req, res, next) => {
     const { id, password } = req.body
@@ -13,11 +14,11 @@ const login = async(req, res, next) => {
         throw new UnethicatedError("Unthication Error")
     }
     const token = await user.createJWT()
-    res.status(200).json({ user: { name: user.name, token } })
+    res.status(200).json({ user: { name: user.name, _id: user._id, token } })
 }
 const register = async(req, res) => {
 
-    console.log(req.body)
+    // console.log(req.body)
 
     const user = await User.create({...req.body })
     const token = await user.createJWT()
@@ -26,9 +27,16 @@ const register = async(req, res) => {
 
 const user = async(req, res) => {
     const id = req.userInfo.userId
-    console.log(id)
+    const havethisuserupdatedhisfeedback = await feedBack.findOne({ createdBy: id });
+    const isTrue = havethisuserupdatedhisfeedback ? true : false
+        // if()
+    console.log(havethisuserupdatedhisfeedback)
     const _user = await User.findOne({ _id: id })
-    res.status(200).json({ user: _user })
+    if (!_user) {
+        throw new UnethicatedError("Unthication Error")
+
+    }
+    res.status(200).json({ user: _user, update: isTrue })
 }
 module.exports = {
     register,
