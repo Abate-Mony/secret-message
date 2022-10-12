@@ -127,7 +127,7 @@ position: relative;font-family: 'Open Sans', sans-serif;
                     <h5 class="modal-title" id="exampleModalToggleLabel"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body text-center" id="feed">
                     thanks for sending your feedback <br>
                 </div>
                 <div class="modal-footer">
@@ -140,7 +140,7 @@ position: relative;font-family: 'Open Sans', sans-serif;
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalToggleLabel2">please send send us a feedback</h5>
+                    <h5 class="modal-title" id="exampleModalToggleLabel2">please send us your feedback</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -187,7 +187,7 @@ position: relative;font-family: 'Open Sans', sans-serif;
                               </button>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link" style="color:pink!important">About</a>
+                        <a href="./about.html" class="nav-link" style="color:pink!important">About</a>
                     </li>
                 </ul>
             </div>
@@ -216,7 +216,7 @@ position: relative;font-family: 'Open Sans', sans-serif;
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    please you logout please take a screenshot your login details
+                    please before logging out ,take screenshots of your logging details
                     <button class=" text-secondary fw-bolder btn btn-outline-primary" data-bs-dismiss="modal" onclick="alert_()">here</button>
                 </div>
                 <div class="modal-footer">
@@ -374,6 +374,7 @@ position: relative;font-family: 'Open Sans', sans-serif;
         function logout() {
             location.replace("./index.html")
             sessionStorage.removeItem("login")
+            sessionStorage.removeItem("token")
         }
 
 
@@ -461,6 +462,7 @@ position: relative;font-family: 'Open Sans', sans-serif;
             }
 
             submitBtn && submitBtn.addEventListener("click", async(e) => {
+                const feed = document.getElementById("feed")
                 const UserInfo = {
                     Email: $("#recipient-name").val(),
                     Message: $("#message-text").val()
@@ -471,7 +473,14 @@ position: relative;font-family: 'Open Sans', sans-serif;
                     body: JSON.stringify(UserInfo)
                 })
                 if (!response.ok) {
-                    console.log(response)
+                    // console.log(response)
+                    feed.classList.add("text-danger")
+                    feed.textContent = "something went wrong 😯"
+                    setTimeout(() => {
+                        feed.classList.remove("text-danger")
+                        feed.textContent = "thanks for sending your feedback <br> we appreciate 😎"
+
+                    }, 2000);
                     return
                 } else {
                     console.log(response)

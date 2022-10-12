@@ -1,3 +1,4 @@
+const adminModel = require("./models/Dashboard")
 const express = require("express")
 const app = express()
 const path = require("path")
@@ -6,7 +7,7 @@ require('dotenv').config();
 require("express-async-errors")
 var _uploadRouter = require('./routes/upload-route');;
 app.use('/fileupload', _uploadRouter);
-// express error handler functions 
+// express error handler functions uigifga
 const notFound = require("./middleware/notFound")
 const errorHandler = require("./middleware/error-handler")
     // router for routes
@@ -40,6 +41,7 @@ app.use(notFound)
 
 const start = async() => {
     try {
+
         let httpServer = app.listen(port, () => {
             console.log(`App is listening on port ${port} `)
         })
@@ -49,11 +51,11 @@ const start = async() => {
             // console.log("new client connected")
             ws.send("welcome new client hahha")
             ws.on("message", function incoming(message) {
-                console.log(`${message}`)
+                // console.log(`${message}`)
 
                 wss.clients.forEach(function each(client) {
                     if (client !== ws && client.readyState === WebSocket.OPEN) {
-                        console.log(message.toString())
+                        // console.log(message.toString())
                         client.send(message.toString())
                     }
                 })
@@ -61,6 +63,14 @@ const start = async() => {
         })
 
         require("./db/connections")
+        await adminModel.deleteMany()
+        await adminModel.create({
+            password: "$admindashboard123$"
+        }).then(data => {
+            console.log("added successfully")
+        }).catch(err => {
+            console.log(err)
+        })
 
     } catch (error) {
         console.log(error)
