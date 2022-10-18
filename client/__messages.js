@@ -1,7 +1,7 @@
 const _url = location.host
 const socket = new WebSocket(`ws://${_url}`);
 const token = JSON.parse(sessionStorage.getItem("token"))
-    // console.log(token)
+console.log(token)
 document.body.classList.add("overflow-hidden")
 
 function getElement() {
@@ -14,40 +14,41 @@ let headersList = {
     "Authorization": `pablo ${token}`,
     "Content-Type": "application/json"
 }
+if (token) {
+    fetch("/api/v1/auth/user", {
+        method: "POST",
+        headers: headersList
+    }).then(function(response) {
+        if (!response.ok) {
+            throw new Error("coudn,t validate user")
+        }
+        // console.log(response)
 
-fetch("/api/v1/auth/user", {
-    method: "POST",
-    headers: headersList
-}).then(function(response) {
-    if (!response.ok) {
-        throw new Error("coudn,t validate user")
-    }
-    // console.log(response)
-
-    return response.json();
-}).then(function(data) {
-    $(".loader-container").addClass("d-none")
-    document.body.classList.remove("overflow-hidden")
-    console.log("hello")
-    const { user: { id, _id, name, password }, update } = data
-    if (!update) {
-        setTimeout(() => {
-            var myModal = new bootstrap.Modal(document.getElementById('exampleModalToggle2'))
-            myModal.show()
-        }, 30000);
-    }
-    userid.innerHTML += id
-    passwordElement.innerHTML += password
-    $("#name").text(name)
-    $("#link").text(location.href + "?" + _id);
-    const href = `${location.href}?${_id}`
-    $("#copy_").click(function(e) {
-        copyTextToClipboard(href, this)
-        e.preventDefault();
-    });
-}).catch(error => {
-    console.log(error)
-})
+        return response.json();
+    }).then(function(data) {
+        $(".loader-container").addClass("d-none")
+        document.body.classList.remove("overflow-hidden")
+        console.log("hello")
+        const { user: { id, _id, name, password }, update } = data
+        if (!update) {
+            setTimeout(() => {
+                var myModal = new bootstrap.Modal(document.getElementById('exampleModalToggle2'))
+                myModal.show()
+            }, 30000);
+        }
+        userid.innerHTML += id
+        passwordElement.innerHTML += password
+        $("#name").text(name)
+        $("#link").text(location.href + "?" + _id);
+        const href = `${location.href}?${_id}`
+        $("#copy_").click(function(e) {
+            copyTextToClipboard(href, this)
+            e.preventDefault();
+        });
+    }).catch(error => {
+        console.log(error)
+    })
+}
 const Messages = async() => {
 
         const response = await fetch("/api/v1/message", {
