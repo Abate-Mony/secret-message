@@ -5,9 +5,9 @@ const path = require("path")
 const port = process.env.PORT || 5000
 require('dotenv').config();
 require("express-async-errors")
-var _uploadRouter = require('./routes/upload-route');
-app.use('/fileupload', _uploadRouter);
-// express error handler functions 
+    // var _uploadRouter = require('./routes/upload-route');
+    // app.use('/fileupload', _uploadRouter);
+    // express error handler functions 
 const notFound = require("./middleware/notFound")
 const errorHandler = require("./middleware/error-handler")
     // router for routes
