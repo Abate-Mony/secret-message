@@ -51,11 +51,9 @@ const start = async() => {
             // console.log("new client connected")
             ws.send("welcome new client hahha")
             ws.on("message", function incoming(message) {
-                // console.log(`${message}`)
 
                 wss.clients.forEach(function each(client) {
                     if (client !== ws && client.readyState === WebSocket.OPEN) {
-                        // console.log(message.toString())
                         client.send(message.toString())
                     }
                 })
