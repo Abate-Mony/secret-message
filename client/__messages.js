@@ -22,8 +22,6 @@ if (token) {
         if (!response.ok) {
             throw new Error("coudn,t validate user")
         }
-        // console.log(response)
-
         return response.json();
     }).then(function(data) {
         $(".loader-container").addClass("d-none")
@@ -61,7 +59,6 @@ const Messages = async() => {
         }
         const data = await response.json()
         const { messages } = data
-        // console.log(messages)
         var messageBox = document.querySelector(".message-box")
         messageBox.innerHTML = messages.length > 0 ?
             messages.map(({ message, _id, }, index) => {
