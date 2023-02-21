@@ -1,0 +1,132 @@
+[33mcommit e4602435a852c124f7a4ae8f2462c61cb0befe59[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Merge: fe20b2d c3984ad
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Tue Feb 21 11:29:36 2023 +0100
+
+    merge branches
+
+[33mcommit c3984ad24f2492887302c2d5ba6b8e6b7ae3b4e5[m[33m ([m[1;31morigin/newbranch[m[33m, [m[1;32mnewbranch[m[33m)[m
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Fri Feb 3 04:13:30 2023 +0100
+
+    remove upload.js
+
+[33mcommit 7a8abc1b7034b0bd28cdf10a84a77ffd8e50c118[m
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Fri Feb 3 04:00:21 2023 +0100
+
+    added a --
+
+[33mcommit fe20b2d54b7161bfea34c5c705d0fa54fa19bd3a[m
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Fri Feb 3 03:26:58 2023 +0100
+
+    trying to fix the nodefoundmodule error
+
+[33mcommit 149d6fed253452c56e95f1d1f2fc4d1a2935f0bd[m
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Wed Oct 19 11:24:03 2022 +0100
+
+    maybe ive fixed the error
+
+[33mcommit e4856f533892963d3f0562b3c4898d010ae9efc6[m
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Wed Oct 19 11:11:48 2022 +0100
+
+    push node modules
+
+[33mcommit b2b542ecc19cdf3dc97ed5c49f117da2acf30e27[m
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Wed Oct 19 11:07:16 2022 +0100
+
+    fsahdoif
+
+[33mcommit 8956e9afa7cb1ffac3ca68d4baea17bcaf53c8bb[m
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Wed Oct 19 10:57:32 2022 +0100
+
+    tryng to make this thing work
+
+[33mcommit 8ced1f51f12bf79abbc76a1249af16ecaeb37f2f[m
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Wed Oct 19 10:52:38 2022 +0100
+
+    remove views folder
+
+[33mcommit d4e7e7f16cc357c87cb5e9e7ebd9e93fe67e3f52[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Wed Oct 19 10:09:06 2022 +0100
+
+    added some changes
+
+[33mcommit 8fdf5469e7a128eda8c048805cb4fa2b179a5f2f[m
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Wed Oct 19 09:09:18 2022 +0100
+
+    toggle switch
+
+[33mcommit 8ec6221767764f192fd64f7fd60c1a678b0b7bd6[m
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Tue Oct 18 19:43:07 2022 +0100
+
+    merge two branches
+
+[33mcommit bb57f27b1a5a21732bc76e8e5425e742019772cc[m
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Thu Oct 13 08:22:15 2022 +0100
+
+     added some changes so that i can push to heroku
+
+[33mcommit 559e9ff56ae533d0f9217a852effaece8dbf54b9[m
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Wed Oct 12 17:50:24 2022 +0100
+
+     connected to mongodb online
+
+[33mcommit 918aed7bc5ff9ea9cb3bf1073923dc46fc6cbb91[m
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Sun Oct 9 21:54:53 2022 +0100
+
+    added websocket
+
+[33mcommit a3ba3145ec0f72e1749831a1a0de414f083c2e3f[m
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Wed Sep 28 15:26:36 2022 +0100
+
+    added multiple adjustment
+
+[33mcommit b2bf1e2dcc0a84b0310f91d2474f77bd2bb04133[m
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Tue Sep 27 12:24:35 2022 +0100
+
+    no
+
+[33mcommit ce6d92207ce05b55ed60ffd6a484df20e5bca161[m
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Tue Sep 27 12:23:59 2022 +0100
+
+    no
+
+[33mcommit f3672a799c9cb8a546844f6da53ed20ffbc02210[m
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Tue Sep 27 11:47:45 2022 +0100
+
+     added some changes to commit
+
+[33mcommit 6bc7ebfa8e019e9d7a4ca374b80bcf4c0c032103[m
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Sun Aug 14 02:47:08 2022 +0100
+
+    hello
+
+[33mcommit a164d71627b3aa920cc8d23da570db55c09ba144[m
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Sun Aug 14 01:35:52 2022 +0100
+
+     adding to heroku
+
+[33mcommit 7cf59988ebba7716352b35288fb27b3f6506cfe0[m
+Author: mmanuel <bateemma14@gmail.com>
+Date:   Thu Aug 11 14:56:31 2022 +0100
+
+    first commit

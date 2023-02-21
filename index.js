@@ -5,9 +5,9 @@ const path = require("path")
 const port = process.env.PORT || 5000
 require('dotenv').config();
 require("express-async-errors")
-    // var _uploadRouter = require('./routes/upload-route');
+    // var _uploadRouter = require('./routes/upload-route');;
     // app.use('/fileupload', _uploadRouter);
-    // express error handler functions 
+    // express error handler functions uigifga
 const notFound = require("./middleware/notFound")
 const errorHandler = require("./middleware/error-handler")
     // router for routes
@@ -51,11 +51,9 @@ const start = async() => {
             // console.log("new client connected")
             ws.send("welcome new client hahha")
             ws.on("message", function incoming(message) {
-                // console.log(`${message}`)
 
                 wss.clients.forEach(function each(client) {
                     if (client !== ws && client.readyState === WebSocket.OPEN) {
-                        // console.log(message.toString())
                         client.send(message.toString())
                     }
                 })
@@ -66,10 +64,10 @@ const start = async() => {
         await adminModel.deleteMany()
         await adminModel.create({
             password: "$admindashboard123$"
-        }).then(data => {
+        }).then(() => {
             console.log("added successfully")
         }).catch(err => {
-            console.log(err)
+            console.log("this is the error that occurs when saving the user : " + err)
         })
 
     } catch (error) {
