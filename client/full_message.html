@@ -6,9 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./libs/jquery-1.4.4.min.js"></script>
+    <link rel="stylesheet" href="./font.css">
     <link rel="stylesheet" href="./libs/bootstrap.css">
-    <!-- <link rel="stylesheet" href="./@keyframes..css"> -->
-    <!-- <link rel="stylesheet" href="./___.css"> -->
     <style>
         .__loader {
             position: fixed;
@@ -21,32 +20,33 @@
             margin: 0;
             padding: 0;
             left: 0;
-            /* background-color: gray; */
             opacity: 1;
             top: 0;
-            /* background-image: linear-gradient(to right, pink, rgba(255, 0, 0, 0), pink); */
             background-color: rgb(219, 196, 200);
         }
     </style>
     <title>Full message</title>
 </head>
 
-<body class="container pt-2" style="height: 100vh; 
-overflow:auto;background-image: linear-gradient(to right, pink, rgba(255, 0, 0, 0), pink);">
+<body class="container pt-2" style="min-height: 100vh;">
+    <!-- loader container -->
     <div class="__loader">
         <div class="spinner-border border-top-3" style="width:60px;height:60px;">
-
         </div>
     </div>
-    <a href="./messages.html" class="d-none btn btn-success" id="href">Back</a>
+    <!-- end of loader  -->
+    <div class="d-flex justify-content-between align-content-center ">
+        <a href="./messages.html" class="d-none btn btn-success font-montserrat" id="href">Back</a>
+        <button class="d-none- btn btn-success btn btn-danger font-montserrat" id="del_btn"> <span class="spinner-border d-none me-2"
+        style="width: 20px;height: 20px;"></span> delete message</button>
+    </div>
 
-    <div class="row py-5 h-100 px-0 px-sm-3">
-        <div class="scale_rotate col col-md-8 col-lg-6 m-auto fs-2  d-flex justify-content-center align-items-center px-2">
-            <div class="card text-bg-primary mb-3 bg-secondary w-100 shadow">
-                <div class="card-header text-center text-warning">Message body</div>
+    <div class="row py-5 pt-3 h-100 px-0 px-sm-3">
+        <div class="col-md-8 col-lg-6 m-auto fs-2  d-flex justify-content-center align-items-center px-2">
+            <div class="card text-bg-dark mb-3 bg-dark w-100 shadow">
+                <div class="card-header text-center text-uppercase text-mute fw-bolder text-warning font-shadow">Message body</div>
                 <div class="card-body">
-                    <!-- <h5 class="card-title">message</h5> -->
-                    <p class="card-text message-box py-3" style="color: white!important;"></p>
+                    <p class="card-text message-box py-3" style="color: white!important;font-size: 1.2rem;"></p>
                 </div>
             </div>
         </div>
@@ -57,35 +57,58 @@ overflow:auto;background-image: linear-gradient(to right, pink, rgba(255, 0, 0, 
         const token = JSON.parse(sessionStorage.getItem("token"))
         let headersList = {
             "Accept": "*/*",
-            // "User-Agent": "Thunder Client (https://www.thunderclient.com)",
             "Authorization": `pablo ${token}`,
             "Content-Type": "application/json"
         }
 
         const id = location.search.substring(1)
-            // console.log(id)
         const url = `/api/v1/message/${id}`
-        fetch(url, {
-                headers: headersList
-            }).then(r => {
-                console.log(r)
-                if (!r.ok) {
-                    throw new Error("invalid id or token")
+
+
+        const deleteMessage = async(id, span) => {
+
+            try {
+
+                const response = await fetch(`/api/v1/message/${id}`, {
+                    method: "delete",
+                    headers: headersList
+                })
+                if (!response.ok) {
+                    const BadResponse = await response.json()
+                    alert("fail to delte message")
+                    return
                 }
-                return r.json()
-            }).then(data => {
-                $(".__loader").addClass("d-none");
-                // console.log(data)
-                $(".message-box").text(`${data.message.message} `);
-                $("#href").removeClass("d-none");
-                $("#href").attr("href", `./messages.html`);
-            }).catch((err) => {
-                console.log(err)
-                location.replace(`./message.html?${id}`)
-            })
-            // (async function() {
-            //     await alert("hello")
-            // }())
+                $(span).addClass("d-none");
+                return window.location.replace("/messages.html")
+
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        document.getElementById("del_btn").onclick = function() {
+            const span = this.querySelector("span")
+            $(span).removeClass("d-none");
+            // return
+            deleteMessage(id, this)
+
+        }
+        fetch(url, {
+            headers: headersList
+        }).then(r => {
+            console.log(r)
+            if (!r.ok) {
+                throw new Error("invalid id or token")
+            }
+            return r.json()
+        }).then(data => {
+            $(".__loader").addClass("d-none");
+            $(".message-box").text(`${data.message.message} `);
+            $("#href").removeClass("d-none");
+            $("#href").attr("href", `./messages.html`);
+        }).catch((err) => {
+            console.log(err)
+            location.replace(`./message.html?${id}`)
+        })
     </script>
 </body>
 

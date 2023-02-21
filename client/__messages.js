@@ -1,12 +1,18 @@
 const _url = location.host
 const socket = new WebSocket(`ws://${_url}`);
 const token = JSON.parse(sessionStorage.getItem("token"))
-console.log(token)
+let timer = null
+var ismessage = false
+
+// console.log(token)
+const messageHeader = document.getElementById("message_header")
+
 document.body.classList.add("overflow-hidden")
 
 function getElement() {
     userid = document.getElementById("user-id")
     passwordElement = document.getElementById("password")
+
 }
 getElement()
 let headersList = {
@@ -34,8 +40,8 @@ if (token) {
                 myModal.show()
             }, 30000);
         }
-        userid.innerHTML += id
-        passwordElement.innerHTML += password
+        userid.innerHTML += `<span class="font-montserrat">${id}</span>`
+        passwordElement.innerHTML += `<span class="font-montserrat">${password}</span>`
         $("#name").text(name)
         $("#link").text(location.href + "?" + _id);
         const href = `${location.href}?${_id}`
@@ -48,7 +54,6 @@ if (token) {
     })
 }
 const Messages = async() => {
-
         const response = await fetch("/api/v1/message", {
             headers: headersList
         })
@@ -64,8 +69,8 @@ const Messages = async() => {
             messages.map(({ message, _id, }, index) => {
                     return (
                             `<div class="col-md-6 col-lg-4 _card position-relative" >
-        <div class="card bg-dark text-white text-center" style="opacity:0.9!important;min-height:40vh!important">
-            <div class="card-body">
+        <div class="card bg-dark text-white text-center mx-2" >
+            <div class="card-body shadow">
                 <div class="hr mb-3 ">
                 </div>
                 <h3 class="card-title mb-3 text-center">
@@ -87,9 +92,20 @@ const Messages = async() => {
         </div>
     </div>`
             )
-        }).join(` `) : "<span class='text-dark fs-1 p-4 text-center alert alert-dark'>no new messages</span>"
+        }).join(` `) :
+        `<img src='https://c.tenor.com/4lA3ViMpstwAAAAj/wait-no.gif' id="no__message" alt='no messages'/>`
     fadeOut()
+    messages.length<=0?nomessage():[clearInterval(timer),messageHeader.textContent="Messages"]
+function nomessage(){
+    const text = "o Messages"
+    var i = 0
+    clearInterval(timer)
+   timer= setInterval(() => {
+        messageHeader.textContent ="N"+ text.slice(0, Math.abs(i))
+        i > text.length - 1 ? i *= -1 : i += 1
+    }, 300)
 
+}
     const delBtn = [...document.querySelectorAll(".del-btn")]
     delBtn.forEach((btn, id) => {
         btn.addEventListener("click", (e) => {
@@ -113,10 +129,14 @@ const deleteMessage = async (id, spanElm) => {
         })
         if (!response.ok) {
             const BadResponse = await response.json()
-            spanElm.classList.add("d-none")
+           spanElm&&spanElm.classList.add("d-none")
             alert("fail to delte message")
-            return
+            const error=new Error(BadResponse,{
+            status:response.status
+            })
+            throw error
         }
+        
        
         return Messages()
 
@@ -139,7 +159,7 @@ function fallbackCopyTextToClipboard(text,elm=null) {
         if(elm){
             elm.textContent+="😚"
             setTimeout(()=>{ 
-                elm.innerHTML="&copy;&nbsp;copy link "
+                elm.innerHTML=`<span><i class="fa-regular fa-copy"></i></span>&nbsp;copy link `
             },3000)
         }
         document.body.removeChild(TempText)
@@ -158,10 +178,10 @@ function copyTextToClipboard(text,elm= null) {
         if(elm){
             elm.textContent+="😚"
             setTimeout(()=>{ 
-                elm.innerHTML="&copy;&nbsp;copy link "
+                elm.innerHTML=`<span><i class="fa-regular fa-copy"></i></span>&nbsp;copy link `
             },3000)
         }
-        console.log('Async: Copying to clipboard was successful!');
+        // console.log('Async: Copying to clipboard was successful!');
     }, function (err) {
         console.error('Async: Could not copy text: ', err);
     });

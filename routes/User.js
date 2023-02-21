@@ -2,10 +2,11 @@ const express = require("express")
 const router = express.Router()
 const User = require("../models/User")
 const auth = require("../middleware/auth")
-const { login, register, user, } = require("../controller/User")
+const { login, register, user, getUserName } = require("../controller/User")
 router.route("/login").post(login)
 router.route("/register").post(register)
 router.route("/user").post(auth, user)
+router.route("/username/:id").get(getUserName)
 router.route("/deleteaccount").get(auth, async(req, res) => {
     const id = req.userInfo.userId
         // console.log("enter here tags")

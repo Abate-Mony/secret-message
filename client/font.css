@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Shadows+Into+Light&display=swap');
+:root {
+    --font-manrope: 'Manrope', sans-serif;
+    --font-montserrat: 'Montserrat', sans-serif;
+    --font-shadow: 'Shadows Into Light', cursive;
+}
+
+body {
+    font-family: var(--font-manrope);
+}
+
+.font-shadow {
+    font-family: var(--font-shadow) !important;
+}
+
+.font-montserrat {
+    font-family: var(--font-montserrat) !important;
+}

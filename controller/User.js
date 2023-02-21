@@ -38,8 +38,22 @@ const user = async(req, res) => {
     }
     res.status(200).json({ user: _user, update: isTrue })
 }
+const getUserName = async(req, res) => {
+    console.log(req.params);
+    const { id } = req.params
+    const username = await User.findOne({
+        _id: id
+    }, {
+        name: 1,
+        _id: 0
+    })
+    if (!username) throw new UnethicatedError("canft find user with id " + id)
+    res.status(200).json({ username })
+
+}
 module.exports = {
     register,
     login,
-    user
+    user,
+    getUserName
 }

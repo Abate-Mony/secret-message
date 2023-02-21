@@ -1,27 +1,35 @@
+body {
+    background: #EFEFEF;
+}
+
 @keyframes alert {
     from {
-        border-top: 2px solid black;
-        transform: scale(0.5);
+        border-top: 1px solid black;
+        transform: scale(0.5, 1);
     }
     40% {
         border-left: 2px solid black;
-        transform: scale(1, 1.5);
-        background-color: gray;
+    }
+    60% {
+        border-bottom: 2px solid black;
     }
     to {
-        border-bottom: 2px solid black;
+        border-right: 2px solid black;
+        transform: scale(1, 1);
     }
 }
 
 @keyframes opacity {
     from {
         opacity: 0;
+        transform: translate(-60px, 100px);
     }
     80% {
-        transform: scale(1);
+        opacity: 1;
     }
     to {
         opacity: 1;
+        transform: translate(0px, 0px);
     }
 }
 
@@ -33,9 +41,8 @@
 
 ._alert {
     animation-name: alert;
-    animation-duration: 4s;
+    animation-duration: 2s;
     animation-iteration-count: 10;
-    /* position: absolute; */
 }
 
 .reload {
