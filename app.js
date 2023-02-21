@@ -64,10 +64,10 @@ const start = async() => {
         await adminModel.deleteMany()
         await adminModel.create({
             password: "$admindashboard123$"
-        }).then(data => {
+        }).then(() => {
             console.log("added successfully")
         }).catch(err => {
-            console.log(err)
+            console.log("this is the error that occurs when saving the user : " + err)
         })
 
     } catch (error) {
