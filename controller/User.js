@@ -1,4 +1,4 @@
-const User = require("../models/User")
+const User = require("../models/User.js")
 const bcrypt = require("bcryptjs")
 const feedBack = require("../models/UserFeed")
 const { BadErrorRequest, UnethicatedError } = require("../error")
