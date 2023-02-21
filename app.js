@@ -28,7 +28,7 @@ app.use(express.json())
     // routes here
 app.use("/api/v1/auth", userRouter)
 app.use("/api/v1/message", auth, messageRouter)
-app.use("/api/v1/upload", uploadRouter)
+    // app.use("/api/v1/upload", uploadRouter)
 app.use("/api/v1/file", downloadRouter)
 app.use("/api/v1/feedback", feedbackRouter)
 app.use("/dashboard", dashboard)
