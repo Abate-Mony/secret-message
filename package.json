@@ -2,7 +2,7 @@
     "name": "secret_message",
     "version": "1.0.0",
     "description": "",
-    "main": "app.js",
+    "main": "index.js",
     "scripts": {
         "start": "node index.js",
         "test": "node test.js",
