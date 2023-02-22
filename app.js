@@ -5,14 +5,14 @@ const path = require("path")
 const port = process.env.PORT || 5000
 require('dotenv').config();
 require("express-async-errors")
-var _uploadRouter = require('./routes/upload-route');;
-app.use('/fileupload', _uploadRouter);
-// express error handler functions uigifga
+    // var _uploadRouter = require('./routes/upload-route');;
+    // app.use('/fileupload', _uploadRouter);
+    // express error handler functions uigifga
 const notFound = require("./middleware/notFound")
 const errorHandler = require("./middleware/error-handler")
     // router for routes
 const fileupload = require("express-fileupload")
-const uploadRouter = require("./routes/uploads")
+    // const uploadRouter = require("./routes/uploads")
 const userRouter = require("./routes/User")
 const auth = require("./middleware/auth")
 const messageRouter = require("./routes/Message")
@@ -29,7 +29,7 @@ app.use(express.json())
 app.use("/api/v1/auth", userRouter)
 app.use("/api/v1/message", auth, messageRouter)
     // app.use("/api/v1/upload", uploadRouter)
-app.use("/api/v1/file", downloadRouter)
+    // app.use("/api/v1/file", downloadRouter)
 app.use("/api/v1/feedback", feedbackRouter)
 app.use("/dashboard", dashboard)
 
