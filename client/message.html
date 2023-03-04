@@ -133,7 +133,7 @@
                     link.classList.remove("d-none")
                     $("#input").val("")
                     const _url = location.host
-                    const socket = new WebSocket(`ws://${_url}`);
+                    const socket = new WebSocket(`wss://${_url}`);
                     const sendMessage = (_id) => {
                         socket.send(_id)
                     }
