@@ -1,4 +1,4 @@
-const Message = require("../models/Message.js")
+const { Message } = require("../models")
 const User = require("../models/User")
 const { BadErrorRequest } = require("../error")
     // const path = require("path")
