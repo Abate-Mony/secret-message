@@ -1,8 +1,8 @@
-const mongoose = require("mongoose")
+const { model, Schema } = require("mongoose")
 
-const MessageSchema = new mongoose.Schema({
+const MessageSchema = new Schema({
     sentTo: {
-        type: mongoose.Schema.ObjectId,
+        type: Schema.ObjectId,
         ref: "User",
         require: [true, "please provide a sentto"],
 
@@ -19,4 +19,5 @@ const MessageSchema = new mongoose.Schema({
 MessageSchema.post("save", function(doc) {
     console.log("%s document create with id ", doc._id)
 })
-module.exports = mongoose.model("Message", MessageSchema)
+const messageModel = model("Message", MessageSchema)
+module.exports = messageModel

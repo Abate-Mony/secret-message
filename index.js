@@ -5,7 +5,7 @@ const express = require("express")
 const app = express()
 const path = require("path")
 const port = process.env.PORT || 5000
-
+const cors = require("cors")
 
 const notFound = require("./middleware/notFound")
 const errorHandler = require("./middleware/error-handler")
@@ -18,6 +18,7 @@ const clientFiles = path.resolve("./client")
 const downloadRouter = require("./routes/download")
 const feedbackRouter = require("./routes/feedBack")
 const dashboard = require("./routes/Dashboard")
+app.use(cors())
 app.use(fileupload())
 app.use("/", express.static(clientFiles))
 app.use("/dashboard", express.static(path.join(__dirname, "public")))
