@@ -1,4 +1,4 @@
-const { Message } = require("../models")
+const Message = require("../models/Message")
 const { BadErrorRequest } = require("../error")
 const getMessages = async(req, res) => {
     const { userId } = req.userInfo
