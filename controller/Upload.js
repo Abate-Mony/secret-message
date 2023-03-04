@@ -1,5 +1,5 @@
 const User = require("../models/User");
-// const Message = require("../models/Message.js");
+const Message = require("../models/UserMessage");
 const { BadErrorRequest } = require("../error")
 
 module.exports = {
