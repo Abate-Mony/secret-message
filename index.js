@@ -1,16 +1,14 @@
+require('dotenv').config();
+require("express-async-errors")
 const adminModel = require("./models/Dashboard")
 const express = require("express")
 const app = express()
 const path = require("path")
 const port = process.env.PORT || 5000
-require('dotenv').config();
-require("express-async-errors")
-    // var _uploadRouter = require('./routes/upload-route');;
-    // app.use('/fileupload', _uploadRouter);
-    // express error handler functions uigifga
+
+
 const notFound = require("./middleware/notFound")
 const errorHandler = require("./middleware/error-handler")
-    // router for routes
 const fileupload = require("express-fileupload")
 const uploadRouter = require("./routes/uploads")
 const userRouter = require("./routes/User")
@@ -20,12 +18,10 @@ const clientFiles = path.resolve("./client")
 const downloadRouter = require("./routes/download")
 const feedbackRouter = require("./routes/feedBack")
 const dashboard = require("./routes/Dashboard")
-    // const dashboardAuth = require("./middleware/dashboardAuth")
 app.use(fileupload())
 app.use("/", express.static(clientFiles))
 app.use("/dashboard", express.static(path.join(__dirname, "public")))
 app.use(express.json())
-    // routes here
 app.use("/api/v1/auth", userRouter)
 app.use("/api/v1/message", auth, messageRouter)
 app.use("/api/v1/upload", uploadRouter)
