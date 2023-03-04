@@ -17,7 +17,7 @@ const messageRouter = require("./routes/Message")
 const clientFiles = path.resolve("./client")
 const downloadRouter = require("./routes/download")
 const feedbackRouter = require("./routes/feedBack")
-const dashboard = require("./routes/Dashboard")
+    // const dashboard = require("./routes/Dashboard")
 app.use(cors())
 app.use(fileupload())
 app.use("/", express.static(clientFiles))
@@ -28,7 +28,7 @@ app.use("/api/v1/message", auth, messageRouter)
 app.use("/api/v1/upload", uploadRouter)
 app.use("/api/v1/file", downloadRouter)
 app.use("/api/v1/feedback", feedbackRouter)
-app.use("/dashboard", dashboard)
+    // app.use("/dashboard", dashboard)
 
 
 app.use(errorHandler)
@@ -58,14 +58,14 @@ const start = async() => {
         })
 
         require("./db/connections")
-        await adminModel.deleteMany()
-        await adminModel.create({
-            password: "$admindashboard123$"
-        }).then(() => {
-            console.log("added successfully")
-        }).catch(err => {
-            console.log("this is the error that occurs when saving the user : " + err)
-        })
+            // await adminModel.deleteMany()
+            // await adminModel.create({
+            //     password: "$admindashboard123$"
+            // }).then(() => {
+            //     console.log("added successfully")
+            // }).catch(err => {
+            //     console.log("this is the error that occurs when saving the user : " + err)
+            // })
 
     } catch (error) {
         console.log(error)
