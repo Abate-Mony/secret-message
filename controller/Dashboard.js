@@ -1,7 +1,7 @@
 const Users = require("../models/User.js")
-const Password = require("../models/Dashboard")
+    // const Password = require("../models/Dashboard")
 const { BadErrorRequest } = require("../error")
-const Message = require("../models/Message")
+const Message = require("../models/UserMessage")
 const allmessages = async(req, res) => {
     const _id = req.params._id
     if (!_id) {
