@@ -16,8 +16,6 @@ const MessageSchema = new Schema({
 }, {
     timestamps: true
 })
-MessageSchema.post("save", function(doc) {
-    console.log("%s document create with id ", doc._id)
-})
 const messageModel = model("Message", MessageSchema)
 module.exports = messageModel
+    // module.exports = model("Userfeed", feedBack)
