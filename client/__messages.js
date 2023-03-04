@@ -1,5 +1,5 @@
 const _url = location.host
-const socket = new WebSocket(`ws://${_url}`);
+const socket = new WebSocket(`wss://${_url}`);
 const token = JSON.parse(sessionStorage.getItem("token"))
 let timer = null
 var ismessage = false
